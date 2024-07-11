@@ -7,7 +7,7 @@ function Todo() {
   const [currentTodo, setCurrentTodo] = useState(null);
 
   const fetchData = async () => {
-    const res = await fetch("http://localhost:5001/todo");
+    const res = await fetch("https://todo-fb-react.onrender.com/todo");
     const resData = await res.json();
 
     if (resData.status === 200) {
@@ -16,7 +16,7 @@ function Todo() {
   };
 
   const addTodoListData = async () => {
-    const res = await fetch("http://localhost:5001/todo", {
+    const res = await fetch("https://todo-fb-react.onrender.com/todo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -29,7 +29,7 @@ function Todo() {
   };
 
   const updateTodoListData = async () => {
-    const res = await fetch(`http://localhost:5001/todo/${currentTodo._id}`, {
+    const res = await fetch(`https://todo-fb-react.onrender.com/todo/${currentTodo._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -44,7 +44,7 @@ function Todo() {
   async function handleSubmit(e) {
     e.preventDefault();
     const res = isEditing ? await updateTodoListData() : await addTodoListData();
-    fetch('http://localhost:5001/todo/')
+    fetch('https://todo-fb-react.onrender.com/todo/')
     if (res.ok) {
       fetchData();
       setTodoValue("");
@@ -60,7 +60,7 @@ function Todo() {
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:5001/todo/${id}`, {
+    const res = await fetch(`https://todo-fb-react.onrender.com/todo/${id}`, {
       method: "DELETE",
     });
     if (res.ok) {
