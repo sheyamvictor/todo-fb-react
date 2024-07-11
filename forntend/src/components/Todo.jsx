@@ -4,15 +4,18 @@ function Todo() {
   const [todoValue, setTodoValue] = useState("");
   const [todoLists, setTodolists] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const[isLoading, setLoad]= useState(false);
+  const[del,setDel]=useState(false);
   const [currentTodo, setCurrentTodo] = useState(null);
 
   const fetchData = async () => {
+    
     const res = await fetch("https://todo-fb-react.onrender.com/todo");
     const resData = await res.json();
 
     if (resData.status === 200) {
       setTodolists(resData.data);
-    }
+      setLoad(false);   }
   };
 
   const addTodoListData = async () => {
@@ -60,11 +63,13 @@ function Todo() {
   };
 
   const handleDelete = async (id) => {
+    setDel(true)
     const res = await fetch(`https://todo-fb-react.onrender.com/todo/${id}`, {
       method: "DELETE",
     });
     if (res.ok) {
       fetchData();
+      setDel(false);
     }
   };
 
@@ -75,10 +80,21 @@ function Todo() {
 
   useEffect(() => {
     fetchData();
+    setLoad(true);
   }, []);
 
   return (
     <>
+    <section>
+  <section style={{  display: isLoading ? 'flex' : 'none'
+}} className='btn4'> <h1 className='load'>Loading...🔃</h1> </section>
+<section style={{  display: del? 'flex' : 'none'
+}} className='btn4'> <h1 className='load'>Delete...🔃</h1> </section>
+
+    </section>
+   
+    <>
+      
       <form onSubmit={handleSubmit}>
         <label htmlFor='todoInput'>Add Todo:</label>
         <input
@@ -102,13 +118,15 @@ function Todo() {
               
 
               <div className='bitem'>
-                <button className='btn2' onClick={() => handleEdit(todoList)}>📝</button>
-                <button className='btn3' onClick={() => handleDelete(todoList._id)}>❌</button>
+                <button className='btn2' onClick={() => handleEdit(todoList)}>Edit<i class="fas fa-edit"></i></button>
+                <button className='btn3' onClick={() => handleDelete(todoList._id)}>Trash<i class="fa-solid fa-trash"></i></button>
               </div>
             </li>
           ))}
         </div>
       </ol>
+    
+    </>
     </>
   );
 }

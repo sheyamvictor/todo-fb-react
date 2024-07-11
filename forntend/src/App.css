@@ -58,13 +58,12 @@ cursor: pointer;
   cursor: pointer;
   background-color: rgb(21, 116, 21);
 }
-.btn3{
-  border: none;
-  padding: 3px 5px;
-  border-radius: 5px;
-  background-color: rgba(147, 115, 115, 0.911);
+.btn3 {
+ background-color: brown;
+ border: none;
+ padding: auto;
+ border-radius: 6px;
   cursor: progress;
-
 }
 
 
@@ -100,6 +99,21 @@ li {
 li:last-child {
   
   border-bottom: none;
+}
+
+.btn4{
+  background-color: rgb(115, 223, 170);
+  position:absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+justify-content: center;
+  align-items: center;
+  font-size: larger;
+  font-weight: 900;
+  
 }
 
 
